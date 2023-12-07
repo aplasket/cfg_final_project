@@ -145,10 +145,43 @@ def determine_max_min(copies, year):
     min_pair = min(copies.items(), key=lambda item: item[1])
     min_key, min_value = min_pair
 
-    print(f"In {year} the {months[max_key]} sold the most with {max_value:,.0f} switch games sold "
+    print(f"In {year}, {months[max_key]} had the most with {max_value:,.0f} switch games sold "
           f"and {months[min_key]} had the least with {min_value:,.0f} switch game copies sold.\n")
 
+    graph_option = input(f"Would you like to see a graph of all months within {year}? y/n ").lower()
+    if graph_option == 'y':
 
+        with open('monthly_sales.csv', 'w+', newline='') as csv_file:
+            field_names = ['month', 'copies_sold']
+            spreadsheet = csv.DictWriter(csv_file, fieldnames=field_names)
+            spreadsheet.writeheader()
+
+            for month, copies_sold in copies.items():
+                spreadsheet.writerow({'month': months[month], 'copies_sold': copies_sold})
+
+        data_csv = pd.read_csv(r'monthly_sales.csv')
+
+        month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                       'November', 'December']
+        # Convert 'month' column to categorical with the specified order
+        data_csv['month'] = pd.Categorical(data_csv['month'], categories=month_order, ordered=True)
+
+        sns.barplot(x='month', y='copies_sold', hue='month', data=data_csv, dodge=False)
+        plt.title(f"Copies Sold by Month in {year}")
+
+        # rotate x-axis labels
+        plt.xticks(rotation=45, ha='right')
+        # # set logarithic scale for y-axis since scope of values is so broad of 1M to 70M
+        plt.yscale('log')
+        # # customize yaxis ticks and labels
+        ticks = [1e5, 1e6, 1e7, 50e6]
+        labels = ['100K', '1M', '10M', '50M']
+        plt.yticks(ticks, labels)
+
+        plt.show()
+
+
+    print("\n")
 def best_game_by_year(data):
     year = input("Enter a year between 2017-2022 to see the best selling game of that year: ")
 
@@ -190,7 +223,6 @@ def games_by_year(data):
     return games
 
 
-
 def best_selling_game(data):
     top_games = {}
 
@@ -205,17 +237,7 @@ def best_selling_game(data):
     max_pair = max(top_games.items(), key=lambda item: item[1])
     max_key, max_value = max_pair
 
-    # for row in data:
-    #     if row['title'] in games:
-    #         games[row['title']] += row['copies_sold']
-    #     else:
-    #         games[row['title']] = row['copies_sold']
-    #
-    # sorted_games = dict(sorted(games.items(), key=lambda item: item[1]))
-    # max_pair = max(sorted_games.items(), key=lambda item: item[1])
-    # max_key, max_value = max_pair
-
-    print(f"The best selling game between 2017-2022 was {max_key} with {float(max_value):,.0f} copies sold \n")
+    print(f"The overall best selling game between 2017-2022 was {max_key} with {float(max_value):,.0f} copies sold \n")
 
 def run():
     data = read_data()
