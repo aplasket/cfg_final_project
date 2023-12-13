@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -24,7 +26,8 @@ def determine_overall_total(data):
 
     total = sum(total_copies_sold)
     print(
-        f"The total number of all top switch games sold between Mar 2017 and Nov 2022 equals: {total:,.0f} \n")
+        f"The total number of copies of the top Switch games sold between Mar 2017 and Nov 2022 equals: {total:,.0f} \n")
+
 
 
 def total_per_genre(data):
@@ -94,7 +97,7 @@ def total_per_year(data):
 
     min_pair = min(years.items(), key=lambda item: item[1])
     min_key, min_value = min_pair
-    print(f"The year {max_key} sold the most copies of best selling switch games with {max_value:,.0f} copies."
+    print(f"The year {max_key} sold the most copies of best selling switch games with {max_value:,.0f} copies. "
           f"And the year {min_key} sold the least amount of switch games with only {min_value:,.0f} copies sold. \n")
 
 
@@ -237,7 +240,14 @@ def best_selling_game(data):
     max_pair = max(top_games.items(), key=lambda item: item[1])
     max_key, max_value = max_pair
 
-    print(f"The overall best selling game between 2017-2022 was {max_key} with {float(max_value):,.0f} copies sold \n")
+    for row in data:
+        if row['title'] == max_key:
+            developer = row['developer']
+            publisher = row['publisher']
+
+    print(f"The overall best selling game between 2017-2022 was {max_key} with {float(max_value):,.0f} copies sold. "
+          f"It was developed by {developer} and published by {publisher}. \n")
+
 
 def run():
     data = read_data()
