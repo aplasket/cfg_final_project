@@ -22,6 +22,8 @@ Kaggle
 * Datasets ★ https://www.kaggle.com/datasets/kabhishm/best-selling-nintendo-switch-video-games
 * Documentation ★ https://www.kaggle.com/docs/datasets 
 
+Pandas
+* Documentation ★ https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html
 [//]: # (Working with Excel files in Python)
 
 [//]: # (* Homepage ★ https://github.com/python-excel/xlrd)
