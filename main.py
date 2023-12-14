@@ -29,7 +29,6 @@ def determine_overall_total(data):
         f"The total number of copies of the top Switch games sold between Mar 2017 and Nov 2022 equals: {total:,.0f} \n")
 
 
-
 def total_per_genre(data):
     genres = {}
 
@@ -185,6 +184,8 @@ def determine_max_min(copies, year):
 
 
     print("\n")
+
+
 def best_game_by_year(data):
     year = input("Enter a year between 2017-2022 to see the best selling game of that year: ")
 
