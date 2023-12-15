@@ -7,6 +7,7 @@ from IPython import embed
 import csv
 from datetime import datetime
 
+
 def read_data():
     data = []
 
@@ -21,8 +22,8 @@ def read_data():
 def determine_overall_total(data):
     total_copies_sold = []
     for row in data:
-        copiesSold = float(row['copies_sold'])
-        total_copies_sold.append(copiesSold)
+        copies_sold = float(row['copies_sold'])
+        total_copies_sold.append(copies_sold)
 
     total = sum(total_copies_sold)
     print(
@@ -269,7 +270,8 @@ def run():
 
     while user_selection not in options:
         print(f"That is not a valid option")
-        user_selection = input(f"Please input one of the following options: {', '.join(options)}. Your selection:  ").title()
+        user_selection = input(f"Please input one of the following options: {', '.join(options)}. "
+                               f"Your selection:  ").title()
         print("\n")
 
     if user_selection in options:
@@ -294,7 +296,17 @@ def run():
             best_selling_game(data)
 
 run()
-#
+
+
+
+
+
+
+
+
+
+
+
 # data_csv = pd.read_csv(r'total_per_year.csv')
 # sns.barplot(x='Year', y='Copies Sold', hue='Title', data=data_csv)
 # plt.title("Copies Sold by Year")
