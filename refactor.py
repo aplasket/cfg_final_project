@@ -25,11 +25,18 @@ def determine_overall_total(data):
 # def copies_by_year(data):
 # def best_game_by_year(data):
 def best_selling_game(data):
-    max_copies_row = data[data['copies_sold'] == max(data['copies_sold'])]
-    title = max_copies_row['title'].values[0]
-    copies_sold = max_copies_row['copies_sold'].values[0]
-    developer = max_copies_row['developer'].values[0]
-    publisher = max_copies_row['publisher'].values[0]
+
+    max_index = data['copies_sold'].idxmax()
+    title = data.loc[max_index, 'title']
+    copies_sold = data.loc[max_index, 'copies_sold']
+    developer = data.loc[max_index, 'developer']
+    publisher = data.loc[max_index, 'publisher']
+
+    # max_copies_row = data[data['copies_sold'] == max(data['copies_sold'])]
+    # title = max_copies_row['title'].values[0]
+    # copies_sold = max_copies_row['copies_sold'].values[0]
+    # developer = max_copies_row['developer'].values[0]
+    # publisher = max_copies_row['publisher'].values[0]
     print(f"The overall best selling game between 2017-2022 was {title} with {copies_sold:,.0f} copies sold. "
           f"It was developed by {developer} and published by {publisher}. \n")
 
