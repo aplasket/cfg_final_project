@@ -25,12 +25,15 @@ def determine_overall_total(data):
 # def copies_by_year(data):
 # def best_game_by_year(data):
 def best_selling_game(data):
-
+    embed()
     max_index = data['copies_sold'].idxmax()
     title = data.loc[max_index, 'title']
     copies_sold = data.loc[max_index, 'copies_sold']
     developer = data.loc[max_index, 'developer']
     publisher = data.loc[max_index, 'publisher']
+
+    # either solution works. the one below returns a list so we'll need to call on the first
+    # element in the list to return the value
 
     # max_copies_row = data[data['copies_sold'] == max(data['copies_sold'])]
     # title = max_copies_row['title'].values[0]
